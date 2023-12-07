@@ -224,10 +224,10 @@ func parseILMExpiration(s string) lifecycle.Expiration {
 		return lifecycle.Expiration{DeleteMarker: true}
 	}
 	if _, err := fmt.Sscanf(s, "%dd", &days); err == nil {
-		return lifecycle.Expiration{Days: lifecycle.ExpirationDays(days), ExpiredObjectAllVersions: true}
+		return lifecycle.Expiration{Days: lifecycle.ExpirationDays(days), DeleteAll: true}
 	}
 	if date, err := time.Parse("2006-01-02", s); err == nil {
-		return lifecycle.Expiration{Date: lifecycle.ExpirationDate{Time: date}, ExpiredObjectAllVersions: true}
+		return lifecycle.Expiration{Date: lifecycle.ExpirationDate{Time: date}, DeleteAll: true}
 	}
 
 	return lifecycle.Expiration{}
